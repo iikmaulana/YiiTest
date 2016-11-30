@@ -56,6 +56,22 @@ class UserForm extends CFormModel
             return false;
         }
     }
+
+    public function delete()
+    {
+        $connection = Yii::app()->db;
+
+        $query = "DELETE FROM " . $this->table_name . " WHERE username = ?";
+        $stmt = $connection->createCommand($query);
+        $stmt->bindParam(1, $this->nama);
+
+        if ($result = $stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 //
 //    public function delete(){
 //        $query = "DELETE FROM " . $this->table_name . " WHERE email = ?";

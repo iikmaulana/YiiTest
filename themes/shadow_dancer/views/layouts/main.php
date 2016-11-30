@@ -71,7 +71,7 @@
         <?php $this->widget('zii.widgets.CMenu', array(
             'items' => array(
                 array('label' => 'Home', 'url' => array('/')),
-                array('label' => 'Register', 'url' => array('/site/page', 'view' => 'register')),
+                array('label' => 'Register', 'url' => array('/site/page', 'view' => 'register'), 'visible' => !Yii::app()->user->isGuest),
                 array('label' => 'Tambah User', 'url' => array('/site/page', 'view' => 'registerUser'), 'visible' => !Yii::app()->user->isGuest),
                 array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
                 array('label' => 'Login', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),

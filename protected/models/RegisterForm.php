@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by IntelliJ IDEA.
  * User: iik_maulana
@@ -14,26 +15,28 @@ class RegisterForm extends CFormModel
     public $telepon;
     private $table_name = "member";
 
-    public function insert(){
-        $connection=Yii::app()->db;
+    public function insert()
+    {
+        $connection = Yii::app()->db;
 
-        $query = "insert into ".$this->table_name." values(?,?,?,?,?)";
-        $stmt=$connection->createCommand($query);
+        $query = "insert into " . $this->table_name . " values(?,?,?,?,?)";
+        $stmt = $connection->createCommand($query);
         $stmt->bindParam(1, $this->nama);
         $stmt->bindParam(2, $this->alamat);
         $stmt->bindParam(3, $this->tanggal);
         $stmt->bindParam(4, $this->email);
         $stmt->bindParam(5, $this->telepon);
 
-        if($stmt->execute()){
+        if ($stmt->execute()) {
             return true;
-        }else{
+        } else {
             return false;
         }
 
     }
 
-    public function update(){
+    public function update()
+    {
         $query = "UPDATE
 					" . $this->table_name . "
 				SET
@@ -52,26 +55,24 @@ class RegisterForm extends CFormModel
         $stmt->bindParam(':email', $this->$email);
         $stmt->bindParam(':telepon', $this->$telepon);
 
-        if($stmt->execute()){
+        if ($stmt->execute()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    public function delete(){
+    public function delete()
+    {
         $query = "DELETE FROM " . $this->table_name . " WHERE email = ?";
 
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->email);
 
-        if($result = $stmt->execute()){
+        if ($result = $stmt->execute()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-
-
-
 }

@@ -93,7 +93,7 @@ $cs->registerCssFile($baseUrl . '/css/jquery.css');
                         <?php $this->widget('zii.widgets.CMenu',array(
                             'items'=>array(
                                 array('label'=>'Edit', 'url'=>array('/site/page', 'view'=>'userEdit'),'visible'=>!Yii::app()->user->isGuest),
-                                array('label'=>'Hapus', 'url'=>array('/site/'),'visible'=>!Yii::app()->user->isGuest),
+                                array('label' => 'Hapus', 'url' => array('/site/page', 'view' => 'deleteUser', 'id' => $row['username']), 'visible' => !Yii::app()->user->isGuest),
                             )
                         )); ?>
                     </td>
