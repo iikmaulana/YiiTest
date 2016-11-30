@@ -6,9 +6,10 @@
  * Time: 4:51
  */
 
-$pro = new UserForm;
+$pro = new RegisterForm;
 $id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
-$pro->nama = $id;
+$pro->email = $id;
+print $id;
 if ($pro->delete()) {
     echo "<script>alert('Data Berhasil Di Hapus');location.href='index.php';</script>";
 } else {

@@ -49,8 +49,8 @@ $cs->registerCssFile($baseUrl . '/css/jquery.css');
                     <td class="text-center" style="vertical-align:middle;">
                         <?php $this->widget('zii.widgets.CMenu',array(
                             'items'=>array(
-                                array('label'=>'Edit', 'url'=>array('/site/page', 'view'=>'memberEdit')),
-                                array('label'=>'Hapus', 'url'=>array('/site/'))
+                                array('label' => 'Edit', 'url' => array('/site/page', 'view' => 'memberEdit', 'id' => $row['email'])),
+                                array('label' => 'Hapus', 'url' => array('/site/page', 'view' => 'deleteMember', 'id' => $row['email']), 'visible' => !Yii::app()->user->isGuest),
                             )
                         )); ?>
                     </td>
@@ -92,7 +92,7 @@ $cs->registerCssFile($baseUrl . '/css/jquery.css');
                     <td class="text-center" style="vertical-align:middle;">
                         <?php $this->widget('zii.widgets.CMenu',array(
                             'items'=>array(
-                                array('label'=>'Edit', 'url'=>array('/site/page', 'view'=>'userEdit'),'visible'=>!Yii::app()->user->isGuest),
+                                array('label' => 'Edit', 'url' => array('/site/page', 'view' => 'userEdit', 'id' => $row['username']), 'visible' => !Yii::app()->user->isGuest),
                                 array('label' => 'Hapus', 'url' => array('/site/page', 'view' => 'deleteUser', 'id' => $row['username']), 'visible' => !Yii::app()->user->isGuest),
                             )
                         )); ?>

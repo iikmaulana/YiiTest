@@ -8,6 +8,7 @@
  */
 class RegisterForm extends CFormModel
 {
+    public $emailLama;
     public $nama;
     public $alamat;
     public $tanggal;
@@ -37,23 +38,24 @@ class RegisterForm extends CFormModel
 
     public function update()
     {
+        $connection = Yii::app()->db;
         $query = "UPDATE
 					" . $this->table_name . "
 				SET
 					nama = :nama,
 					alamat = :alamat,
-					tanggal = :tanggal,
+					tanggal_lahir = :tanggal,
 					email = :email,
-					telepon = :telepon,
+					no_tlpn = :telepon
 				WHERE
-					email = :email";
-
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':nama', $this->$nama);
-        $stmt->bindParam(':alamat', $this->$alamat);
-        $stmt->bindParam(':tanggal', $this->$tanggal);
-        $stmt->bindParam(':email', $this->$email);
-        $stmt->bindParam(':telepon', $this->$telepon);
+					email = :emailLama";
+        $stmt = $connection->createCommand($query);
+        $stmt->bindParam(':nama', $this->nama);
+        $stmt->bindParam(':alamat', $this->alamat);
+        $stmt->bindParam(':tanggal', $this->tanggal);
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':telepon', $this->telepon);
+        $stmt->bindParam(':emailLama', $this->emailLama);
 
         if ($stmt->execute()) {
             return true;
@@ -64,9 +66,10 @@ class RegisterForm extends CFormModel
 
     public function delete()
     {
-        $query = "DELETE FROM " . $this->table_name . " WHERE email = ?";
+        $connection = Yii::app()->db;
 
-        $stmt = $this->conn->prepare($query);
+        $query = "DELETE FROM " . $this->table_name . " WHERE email = ?";
+        $stmt = $connection->createCommand($query);
         $stmt->bindParam(1, $this->email);
 
         if ($result = $stmt->execute()) {

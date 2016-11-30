@@ -7,38 +7,29 @@
  */
 $this->pageTitle = Yii::app()->name . ' - Register';
 $this->breadcrumbs = array(
-    'Edit Data Member',
+    'Edit Data User',
 );
 
+$id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
+
 if ($_POST) {
-    $eks = new RegisterForm;
+    $eks = new UserForm;
 
     $eks->nama = $_POST['nama'];
-    $eks->alamat = $_POST['alamat'];
-    $eks->tanggal = $_POST['tgl'];
-    $eks->email = $_POST['email'];
-    $eks->telepon = $_POST['telepon'];
+    $eks->password = $_POST['password'];
+    $eks->userlama = $id;
 
-    if ($eks->insert()) {
-        ?>
-        <script type="text/javascript">
-            window.onload = function () {
-                showStickySuccessToast();
-            };
-        </script>
-    <?php
+    if ($eks->update()) {
+        echo "<script>alert('Data Berhasil Di Rubah');location.href='index.php';</script>";
     } else {
-        ?>
-        <script type="text/javascript">
-            window.onload = function () {
-                showStickyErrorToast();
-            };
-        </script>
-    <?php
+        echo "<script>alert('Data Tidak Dapat Di Rubah');location.href='index.php';</script>";
     }
 }
 ?>
 <h1>Form Edit Data User</h1>
+<?php
+print $id;
+?>
 <div class="container showgrid">
     <div class="form">
         <form method="post">

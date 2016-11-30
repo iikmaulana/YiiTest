@@ -9,6 +9,7 @@ class UserForm extends CFormModel
 {
     public $nama;
     public $password;
+    public $userlama;
     private $table_name = "user";
 
     public function insert(){
@@ -32,23 +33,19 @@ class UserForm extends CFormModel
     }
 //
     public function update(){
+        $connection = Yii::app()->db;
         $query = "UPDATE
 					" . $this->table_name . "
 				SET
-					nama = :nama,
-					alamat = :alamat,
-					tanggal = :tanggal,
-					email = :email,
-					telepon = :telepon,
+					username = :username,
+					password = :password
 				WHERE
-					email = :email";
+					username = :userlama";
 
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':nama', $this->$nama);
-        $stmt->bindParam(':alamat', $this->$alamat);
-        $stmt->bindParam(':tanggal', $this->$tanggal);
-        $stmt->bindParam(':email', $this->$email);
-        $stmt->bindParam(':telepon', $this->$telepon);
+        $stmt = $connection->createCommand($query);
+        $stmt->bindParam(':username', $this->nama);
+        $stmt->bindParam(':password', $this->password);
+        $stmt->bindParam(':userlama', $this->userlama);
 
         if($stmt->execute()){
             return true;
